@@ -21,5 +21,22 @@ export class UsersModel {
 
         return user.rows[0];
     };
+
+    async updateUsersBalance(from_user: number, to_user: number, valor: number) {
+                await pool.query(
+            `UPDATE users 
+             SET saldo = saldo - $2
+             WHERE id = $1 RETURNING *`,
+            [from_user, valor]
+        );
+
+        await pool.query(
+            `UPDATE users 
+             SET saldo = saldo + $2
+             WHERE id = $1 RETURNING *`,
+            [to_user, valor]
+        );
+
+    }
 };
 
