@@ -8,4 +8,8 @@ router.post("/create-user", (req, res) => {
     return usersController.createUser(req, res);
 });
 
+router.get("/user/:id", (req, res) => {
+    return usersController.getUserById(req, res);
+});
+
 export default router;
